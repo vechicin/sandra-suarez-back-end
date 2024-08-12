@@ -40,7 +40,7 @@ class ProductsController < ApplicationController
   private
 
   def set_product
-    @product = Product.find_by_composite_key(params[:product_category_id], params[:archangel_id])
+    @product = Product.find_by_composite_key(params[:id], params[:product_category_id], params[:archangel_id])
   end
 
   def product_params

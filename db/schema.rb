@@ -13,9 +13,8 @@
 ActiveRecord::Schema[7.1].define(version: 2024_08_12_160143) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "uuid-ossp"
 
-  create_table "archangels", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "archangels", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.string "color"
@@ -23,7 +22,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_12_160143) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "product_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "product_categories", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -34,8 +33,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_12_160143) do
     t.text "description"
     t.decimal "price", precision: 10, scale: 2, null: false
     t.integer "quantity"
-    t.uuid "product_category_id", null: false
-    t.uuid "archangel_id", null: false
+    t.bigint "product_category_id", null: false
+    t.bigint "archangel_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "composite_key"

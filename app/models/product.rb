@@ -2,17 +2,20 @@ class Product < ApplicationRecord
   belongs_to :product_category
   belongs_to :archangel
 
-  before_save :set_composite_key
+  validates :product_category, presence: true
+  validates :archangel, presence: true
 
-  validates :composite_key, presence: true, uniqueness: true
+  after_create :set_composite_key
 
   def self.find_by_composite_key(product_category_id, archangel_id)
-    find_by(composite_key: "#{product_category_id}-#{archangel_id}")
+    find_by(composite_key: "#{id}-#{product_category_id}-#{archangel_id}")
   end
 
   private
 
   def set_composite_key
-    self.composite_key = "#{product_category_id}-#{archangel_id}"
+    if composite_key.blank? && id.present?
+      update_column(:composite_key, "#{id}-#{product_category_id}-#{archangel_id}")
+    end
   end
 end

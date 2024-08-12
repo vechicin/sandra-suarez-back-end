@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   resources :products, param: :composite_key, only: [:index, :show, :create, :update, :destroy]
+  resources :product_categories
+  resources :archangels
 end
