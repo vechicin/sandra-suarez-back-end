@@ -3,9 +3,17 @@
 one:
   name: MyString
   description: MyText
-  color: MyString
+  price: 9.99
+  quantity: 1
+  images: MyText
+  product_reference: one
+  archangel: one
 
 two:
   name: MyString
   description: MyText
-  color: MyString
+  price: 9.99
+  quantity: 1
+  images: MyText
+  product_reference: two
+  archangel: two

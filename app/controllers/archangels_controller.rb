@@ -7,18 +7,13 @@ class ArchangelsController < ApplicationController
   end
 
   def show
-    if @archangel
-      render json: @archangel
-    else
-      render json: { error: 'Archangel not found' }, status: :not_found
-    end
+    render json: @archangel
   end
 
   def create
     @archangel = Archangel.new(archangel_params)
-
     if @archangel.save
-      render json: @archangel, status: :created, location: @archangel
+      render json: @archangel, status: :created
     else
       render json: @archangel.errors, status: :unprocessable_entity
     end

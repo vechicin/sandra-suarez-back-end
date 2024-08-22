@@ -7,18 +7,13 @@ class ProductsController < ApplicationController
   end
 
   def show
-    if @product
-      render json: @product
-    else
-      render json: { error: 'Product not found' }, status: :not_found
-    end
+    render json: @product
   end
 
   def create
     @product = Product.new(product_params)
-
     if @product.save
-      render json: @product, status: :created, location: @product
+      render json: @product, status: :created
     else
       render json: @product.errors, status: :unprocessable_entity
     end
@@ -40,10 +35,10 @@ class ProductsController < ApplicationController
   private
 
   def set_product
-    @product = Product.find_by_composite_key(params[:id], params[:product_category_id], params[:archangel_id])
+    @product = Product.find(params[:id])
   end
 
   def product_params
-    params.require(:product).permit(:product_category_id, :archangel_id, :name, :description, :price, :quantity)
+    params.require(:product).permit(:name)
   end
 end

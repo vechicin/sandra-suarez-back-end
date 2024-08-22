@@ -7,8 +7,8 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-
-  resources :products, param: :composite_key, only: [:index, :show, :create, :update, :destroy]
-  resources :product_categories
+  resources :products
+  resources :product_references
+  resources :product_items
   resources :archangels
 end
