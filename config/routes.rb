@@ -7,8 +7,8 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  resources :products
+  resources :product_categories
   resources :product_references
-  resources :product_items
+  resources :products
   resources :archangels
 end

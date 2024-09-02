@@ -3,11 +3,21 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all
-    render json: @products
+    render json: @products.as_json(
+      include: {
+        product_reference: { only: [:name, :description] },
+        archangel: { only: [:name, :description, :color] }
+      }
+    )
   end
 
   def show
-    render json: @product
+    render json: @product.as_json(
+      include: {
+        product_reference: { only: [:name, :description] },
+        archangel: { only: [:name, :description, :color] }
+      }
+    )
   end
 
   def create
@@ -39,6 +49,6 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name)
+    params.require(:product).permit(:name, :description, :price, :quantity, :images, :product_reference_id, :archangel_id)
   end
 end

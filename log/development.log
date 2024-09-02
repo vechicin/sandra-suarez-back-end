@@ -861,3 +861,809 @@ Processing by ProductsController#index as */*
 Completed 200 OK in 19ms (Views: 3.9ms | ActiveRecord: 19.2ms | Allocations: 10383)
 
 
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (2.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+Migrating to RenameProductItemsAndProducts (20240902165727)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.6ms)[0m  [1m[35mALTER TABLE "products" RENAME TO "product_categories"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER INDEX "products_pkey" RENAME TO "product_categories_pkey"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "public"."products_id_seq" RENAME TO "product_categories_id_seq"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "product_items" RENAME TO "products"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER INDEX "product_items_pkey" RENAME TO "products_pkey"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "public"."product_items_id_seq" RENAME TO "products_id_seq"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER INDEX "index_product_items_on_archangel_id" RENAME TO "index_products_on_archangel_id"[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER INDEX "index_product_items_on_product_reference_id" RENAME TO "index_products_on_product_reference_id"[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240902165727') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/products" for 127.0.0.1 at 2024-09-02 12:02:38 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#index as */*
+  Parameters: {"name"=>"Collar", "product"=>{"name"=>"Collar"}}
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 9.4ms | Allocations: 2339)
+
+
+  
+NameError (uninitialized constant ProductsController::ProductItem):
+  
+app/controllers/products_controller.rb:5:in `index'
+Started GET "/products" for 127.0.0.1 at 2024-09-02 12:04:17 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#index as */*
+  Parameters: {"name"=>"Collar", "product"=>{"name"=>"Collar"}}
+  [1m[36mProduct Load (1.7ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:6:in `index'
+Completed 200 OK in 10ms (Views: 0.5ms | ActiveRecord: 11.9ms | Allocations: 4223)
+
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (103.7ms)[0m  [1m[35mDROP DATABASE IF EXISTS "sandra_suarez_back_end_development"[0m
+  [1m[35m (78.6ms)[0m  [1m[35mDROP DATABASE IF EXISTS "sandra_suarez_back_end_test"[0m
+  [1m[35m (253.8ms)[0m  [1m[35mCREATE DATABASE "sandra_suarez_back_end_development" ENCODING = 'unicode'[0m
+  [1m[35m (82.3ms)[0m  [1m[35mCREATE DATABASE "sandra_suarez_back_end_test" ENCODING = 'unicode'[0m
+  [1m[35m (11.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (4.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2024-09-02 17:04:42.961238', '2024-09-02 17:04:42.961240') RETURNING "key"[0m
+Migrating to CreateProducts (20240822201655)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (8.1ms)[0m  [1m[35mCREATE TABLE "products" ("id" bigserial primary key, "name" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240822201655') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProductReferences (20240822201813)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (23.3ms)[0m  [1m[35mCREATE TABLE "product_references" ("id" bigserial primary key, "name" character varying, "description" text, "product_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_af294d612a"
+FOREIGN KEY ("product_id")
+  REFERENCES "products" ("id")
+)[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE INDEX "index_product_references_on_product_id" ON "product_references" ("product_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240822201813') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateArchangels (20240822201908)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.1ms)[0m  [1m[35mCREATE TABLE "archangels" ("id" bigserial primary key, "name" character varying, "description" text, "color" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240822201908') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProductItems (20240822201912)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.5ms)[0m  [1m[35mCREATE TABLE "product_items" ("id" bigserial primary key, "name" character varying, "description" text, "price" decimal, "quantity" integer, "images" text, "product_reference_id" bigint NOT NULL, "archangel_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_b3a5e45afb"
+FOREIGN KEY ("product_reference_id")
+  REFERENCES "product_references" ("id")
+, CONSTRAINT "fk_rails_8227583116"
+FOREIGN KEY ("archangel_id")
+  REFERENCES "archangels" ("id")
+)[0m
+  [1m[35m (5.2ms)[0m  [1m[35mCREATE INDEX "index_product_items_on_product_reference_id" ON "product_items" ("product_reference_id")[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE INDEX "index_product_items_on_archangel_id" ON "product_items" ("archangel_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240822201912') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to RenameProductItemsAndProducts (20240902165727)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.5ms)[0m  [1m[35mALTER TABLE "products" RENAME TO "product_categories"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER INDEX "products_pkey" RENAME TO "product_categories_pkey"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "public"."products_id_seq" RENAME TO "product_categories_id_seq"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "product_items" RENAME TO "products"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER INDEX "product_items_pkey" RENAME TO "products_pkey"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mALTER TABLE "public"."product_items_id_seq" RENAME TO "products_id_seq"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mALTER INDEX "index_product_items_on_archangel_id" RENAME TO "index_products_on_archangel_id"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER INDEX "index_product_items_on_product_reference_id" RENAME TO "index_products_on_product_reference_id"[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240902165727') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/product_categories" for 127.0.0.1 at 2024-09-02 12:07:12 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductCategoriesController#create as */*
+  Parameters: {"name"=>"Collar", "product_category"=>{"name"=>"Collar"}}
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 14.6ms | Allocations: 8496)
+
+
+  
+NoMethodError (undefined method `save' for nil):
+  
+app/controllers/product_categories_controller.rb:15:in `create'
+Started POST "/product_categories" for 127.0.0.1 at 2024-09-02 12:07:34 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductCategoriesController#create as */*
+  Parameters: {"name"=>"Collar", "product_category"=>{"name"=>"Collar"}}
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/product_categories_controller.rb:15:in `create'
+  [1m[36mProductCategory Create (2.7ms)[0m  [1m[32mINSERT INTO "product_categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Collar"], ["created_at", "2024-09-02 17:07:34.944186"], ["updated_at", "2024-09-02 17:07:34.944186"]]
+  ↳ app/controllers/product_categories_controller.rb:15:in `create'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/product_categories_controller.rb:15:in `create'
+Completed 201 Created in 16ms (Views: 0.2ms | ActiveRecord: 23.6ms | Allocations: 10858)
+
+
+Started GET "/product_categories" for 127.0.0.1 at 2024-09-02 12:07:39 -0500
+Processing by ProductCategoriesController#index as */*
+  Parameters: {"name"=>"Collar", "product_category"=>{"name"=>"Collar"}}
+Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 1089)
+
+
+Started GET "/product_categories" for 127.0.0.1 at 2024-09-02 12:07:51 -0500
+Processing by ProductCategoriesController#index as */*
+  Parameters: {"name"=>"Collar", "product_category"=>{"name"=>"Collar"}}
+Completed 200 OK in 0ms (Views: 0.0ms | ActiveRecord: 0.0ms | Allocations: 66)
+
+
+Started GET "/product_categories" for 127.0.0.1 at 2024-09-02 12:08:26 -0500
+Processing by ProductCategoriesController#index as */*
+  Parameters: {"name"=>"Collar", "product_category"=>{"name"=>"Collar"}}
+  [1m[36mProductCategory Load (0.5ms)[0m  [1m[34mSELECT "product_categories".* FROM "product_categories"[0m
+  ↳ app/controllers/product_categories_controller.rb:6:in `index'
+Completed 200 OK in 3ms (Views: 1.4ms | ActiveRecord: 3.8ms | Allocations: 2753)
+
+
+Started GET "/archangels" for 127.0.0.1 at 2024-09-02 12:10:27 -0500
+Processing by ArchangelsController#index as */*
+  [1m[36mArchangel Load (0.9ms)[0m  [1m[34mSELECT "archangels".* FROM "archangels"[0m
+  ↳ app/controllers/archangels_controller.rb:6:in `index'
+Completed 200 OK in 4ms (Views: 0.6ms | ActiveRecord: 0.9ms | Allocations: 1504)
+
+
+Started POST "/archangels" for 127.0.0.1 at 2024-09-02 12:15:27 -0500
+Processing by ArchangelsController#create as */*
+  Parameters: {"name"=>"Miguel", "description"=>"Un arcángel líder y guerrero contra las fuerzas del mal", "color"=>"Azul", "archangel"=>{"name"=>"Miguel", "description"=>"Un arcángel líder y guerrero contra las fuerzas del mal", "color"=>"Azul"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/archangels_controller.rb:15:in `create'
+  [1m[36mArchangel Create (1.4ms)[0m  [1m[32mINSERT INTO "archangels" ("name", "description", "color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Miguel"], ["description", "Un arcángel líder y guerrero contra las fuerzas del mal"], ["color", "Azul"], ["created_at", "2024-09-02 17:15:27.589194"], ["updated_at", "2024-09-02 17:15:27.589194"]]
+  ↳ app/controllers/archangels_controller.rb:15:in `create'
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/archangels_controller.rb:15:in `create'
+Completed 201 Created in 8ms (Views: 0.1ms | ActiveRecord: 5.7ms | Allocations: 5771)
+
+
+Started GET "/archangels" for 127.0.0.1 at 2024-09-02 12:15:33 -0500
+Processing by ArchangelsController#index as */*
+  [1m[36mArchangel Load (0.4ms)[0m  [1m[34mSELECT "archangels".* FROM "archangels"[0m
+  ↳ app/controllers/archangels_controller.rb:6:in `index'
+Completed 200 OK in 1ms (Views: 0.8ms | ActiveRecord: 0.4ms | Allocations: 638)
+
+
+Started POST "/products" for 127.0.0.1 at 2024-09-02 12:19:06 -0500
+Processing by ProductsController#create as */*
+  Parameters: {"name"=>"Collar", "product"=>{"name"=>"Collar"}}
+Completed 500 Internal Server Error in 0ms (ActiveRecord: 2.6ms | Allocations: 183)
+
+
+  
+NameError (undefined local variable or method `product_item_params' for an instance of ProductsController):
+  
+app/controllers/products_controller.rb:14:in `create'
+Started POST "/products" for 127.0.0.1 at 2024-09-02 12:19:29 -0500
+Processing by ProductsController#create as */*
+  Parameters: {"name"=>"Collar", "product"=>{"name"=>"Collar"}}
+Completed 500 Internal Server Error in 0ms (ActiveRecord: 3.2ms | Allocations: 160)
+
+
+  
+NameError (undefined local variable or method `product_item_params' for an instance of ProductsController):
+  
+app/controllers/products_controller.rb:14:in `create'
+Started POST "/products" for 127.0.0.1 at 2024-09-02 12:19:42 -0500
+Processing by ProductsController#create as */*
+  Parameters: {"name"=>"Collar", "product"=>{"name"=>"Collar"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/products_controller.rb:15:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/products_controller.rb:15:in `create'
+Completed 422 Unprocessable Content in 22ms (Views: 3.1ms | ActiveRecord: 13.7ms | Allocations: 13647)
+
+
+Started GET "/product_references" for 127.0.0.1 at 2024-09-02 12:30:47 -0500
+Processing by ProductReferencesController#index as */*
+  Parameters: {"name"=>"Collar", "product_reference"=>{"name"=>"Collar"}}
+  [1m[36mProductReference Load (0.5ms)[0m  [1m[34mSELECT "product_references".* FROM "product_references"[0m
+  ↳ app/controllers/product_references_controller.rb:6:in `index'
+Completed 200 OK in 1ms (Views: 0.6ms | ActiveRecord: 13.9ms | Allocations: 805)
+
+
+Started GET "/product_categories" for 127.0.0.1 at 2024-09-02 12:30:54 -0500
+Processing by ProductCategoriesController#index as */*
+  Parameters: {"name"=>"Collar", "product_category"=>{"name"=>"Collar"}}
+  [1m[36mProductCategory Load (1.8ms)[0m  [1m[34mSELECT "product_categories".* FROM "product_categories"[0m
+  ↳ app/controllers/product_categories_controller.rb:6:in `index'
+Completed 200 OK in 6ms (Views: 1.7ms | ActiveRecord: 5.6ms | Allocations: 2570)
+
+
+Started POST "/product_references" for 127.0.0.1 at 2024-09-02 12:31:27 -0500
+Processing by ProductReferencesController#create as */*
+  Parameters: {"name"=>"Collar de plata", "description"=>"Collar de plata de la más alta pureza", "product_reference"=>{"name"=>"Collar de plata", "description"=>"Collar de plata de la más alta pureza"}}
+Completed 422 Unprocessable Content in 4ms (Views: 0.3ms | ActiveRecord: 0.0ms | Allocations: 4148)
+
+
+Started POST "/product_references" for 127.0.0.1 at 2024-09-02 12:31:56 -0500
+Processing by ProductReferencesController#create as */*
+  Parameters: {"name"=>"Collar de plata", "description"=>"Collar de plata de la más alta pureza", "product_category"=>1, "product_reference"=>{"name"=>"Collar de plata", "description"=>"Collar de plata de la más alta pureza"}}
+Completed 422 Unprocessable Content in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms | Allocations: 707)
+
+
+Started POST "/product_references" for 127.0.0.1 at 2024-09-02 12:32:03 -0500
+Processing by ProductReferencesController#create as */*
+  Parameters: {"name"=>"Collar de plata", "description"=>"Collar de plata de la más alta pureza", "product_category_id"=>1, "product_reference"=>{"name"=>"Collar de plata", "description"=>"Collar de plata de la más alta pureza"}}
+Completed 422 Unprocessable Content in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms | Allocations: 707)
+
+
+Started POST "/product_references" for 127.0.0.1 at 2024-09-02 12:32:45 -0500
+Processing by ProductReferencesController#create as */*
+  Parameters: {"name"=>"Collar de plata", "description"=>"Collar de plata de la más alta pureza", "product_category_id"=>1, "product_reference"=>{"name"=>"Collar de plata", "description"=>"Collar de plata de la más alta pureza"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/product_references_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/product_references_controller.rb:20:in `create'
+Completed 422 Unprocessable Content in 8ms (Views: 0.3ms | ActiveRecord: 7.8ms | Allocations: 5058)
+
+
+Started POST "/product_references" for 127.0.0.1 at 2024-09-02 12:33:18 -0500
+Processing by ProductReferencesController#create as */*
+  Parameters: {"name"=>"Collar de plata", "description"=>"Collar de plata de la más alta pureza", "product_category_id"=>1, "product_reference"=>{"name"=>"Collar de plata", "description"=>"Collar de plata de la más alta pureza"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/product_references_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/product_references_controller.rb:20:in `create'
+Completed 422 Unprocessable Content in 9ms (Views: 0.3ms | ActiveRecord: 6.7ms | Allocations: 5054)
+
+
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/product_references" for 127.0.0.1 at 2024-09-02 12:33:47 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductReferencesController#create as */*
+  Parameters: {"name"=>"Collar de plata", "description"=>"Collar de plata de la más alta pureza", "product_id"=>1, "product_reference"=>{"name"=>"Collar de plata", "description"=>"Collar de plata de la más alta pureza", "product_id"=>1}}
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/product_references_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/product_references_controller.rb:20:in `create'
+Completed 422 Unprocessable Content in 38ms (Views: 4.3ms | ActiveRecord: 32.2ms | Allocations: 15182)
+
+
+Started POST "/product_references" for 127.0.0.1 at 2024-09-02 12:34:19 -0500
+Processing by ProductReferencesController#create as */*
+  Parameters: {"name"=>"Collar de plata", "description"=>"Collar de plata de la más alta pureza", "product_id"=>1, "product_reference"=>{"name"=>"Collar de plata", "description"=>"Collar de plata de la más alta pureza", "product_id"=>1}}
+Completed 422 Unprocessable Content in 1ms (Views: 0.6ms | ActiveRecord: 0.0ms | Allocations: 725)
+
+
+Started POST "/product_references" for 127.0.0.1 at 2024-09-02 12:36:18 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductReferencesController#create as */*
+  Parameters: {"name"=>"Collar de plata", "description"=>"Collar de plata de la más alta pureza", "product_category_id"=>1, "product_reference"=>{"name"=>"Collar de plata", "description"=>"Collar de plata de la más alta pureza"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/product_references_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/product_references_controller.rb:20:in `create'
+Completed 422 Unprocessable Content in 22ms (Views: 3.7ms | ActiveRecord: 22.8ms | Allocations: 15166)
+
+
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (108.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS "sandra_suarez_back_end_development"[0m
+  [1m[35m (50.7ms)[0m  [1m[35mDROP DATABASE IF EXISTS "sandra_suarez_back_end_test"[0m
+  [1m[35m (175.2ms)[0m  [1m[35mCREATE DATABASE "sandra_suarez_back_end_development" ENCODING = 'unicode'[0m
+  [1m[35m (82.2ms)[0m  [1m[35mCREATE DATABASE "sandra_suarez_back_end_test" ENCODING = 'unicode'[0m
+  [1m[35m (7.9ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2024-09-02 17:39:42.624463', '2024-09-02 17:39:42.624465') RETURNING "key"[0m
+Migrating to CreateProducts (20240822201655)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.8ms)[0m  [1m[35mCREATE TABLE "products" ("id" bigserial primary key, "name" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240822201655') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProductReferences (20240822201813)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (13.4ms)[0m  [1m[35mCREATE TABLE "product_references" ("id" bigserial primary key, "name" character varying, "description" text, "product_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_af294d612a"
+FOREIGN KEY ("product_id")
+  REFERENCES "products" ("id")
+)[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE INDEX "index_product_references_on_product_id" ON "product_references" ("product_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240822201813') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateArchangels (20240822201908)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.7ms)[0m  [1m[35mCREATE TABLE "archangels" ("id" bigserial primary key, "name" character varying, "description" text, "color" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240822201908') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProductItems (20240822201912)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.2ms)[0m  [1m[35mCREATE TABLE "product_items" ("id" bigserial primary key, "name" character varying, "description" text, "price" decimal, "quantity" integer, "images" text, "product_reference_id" bigint NOT NULL, "archangel_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_b3a5e45afb"
+FOREIGN KEY ("product_reference_id")
+  REFERENCES "product_references" ("id")
+, CONSTRAINT "fk_rails_8227583116"
+FOREIGN KEY ("archangel_id")
+  REFERENCES "archangels" ("id")
+)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_product_items_on_product_reference_id" ON "product_items" ("product_reference_id")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_product_items_on_archangel_id" ON "product_items" ("archangel_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240822201912') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to RenameProductItemsAndProducts (20240902165727)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.3ms)[0m  [1m[35mALTER TABLE "products" RENAME TO "product_categories"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER INDEX "products_pkey" RENAME TO "product_categories_pkey"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "public"."products_id_seq" RENAME TO "product_categories_id_seq"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "product_items" RENAME TO "products"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER INDEX "product_items_pkey" RENAME TO "products_pkey"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "public"."product_items_id_seq" RENAME TO "products_id_seq"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER INDEX "index_product_items_on_archangel_id" RENAME TO "index_products_on_archangel_id"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER INDEX "index_product_items_on_product_reference_id" RENAME TO "index_products_on_product_reference_id"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "product_references" RENAME COLUMN "product_id" TO "product_category_id"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER INDEX "index_product_references_on_product_id" RENAME TO "index_product_references_on_product_category_id"[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER INDEX "index_product_references_on_product_id" RENAME TO "index_product_references_on_product_category_id"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(757198179149183205)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+Migrating to RenameProductItemsAndProducts (20240902165727)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "products" RENAME TO "product_categories"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER INDEX "products_pkey" RENAME TO "product_categories_pkey"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "public"."products_id_seq" RENAME TO "product_categories_id_seq"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "product_items" RENAME TO "products"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER INDEX "product_items_pkey" RENAME TO "products_pkey"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "public"."product_items_id_seq" RENAME TO "products_id_seq"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER INDEX "index_product_items_on_archangel_id" RENAME TO "index_products_on_archangel_id"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER INDEX "index_product_items_on_product_reference_id" RENAME TO "index_products_on_product_reference_id"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "product_references" RENAME COLUMN "product_id" TO "product_category_id"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER INDEX "index_product_references_on_product_id" RENAME TO "index_product_references_on_product_category_id"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(757198179149183205)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+Migrating to RenameProductItemsAndProducts (20240902165727)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "products" RENAME TO "product_categories"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER INDEX "products_pkey" RENAME TO "product_categories_pkey"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "public"."products_id_seq" RENAME TO "product_categories_id_seq"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "product_items" RENAME TO "products"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER INDEX "product_items_pkey" RENAME TO "products_pkey"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "public"."product_items_id_seq" RENAME TO "products_id_seq"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER INDEX "index_product_items_on_archangel_id" RENAME TO "index_products_on_archangel_id"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER INDEX "index_product_items_on_product_reference_id" RENAME TO "index_products_on_product_reference_id"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "product_references" RENAME COLUMN "product_id" TO "product_category_id"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER INDEX "index_product_references_on_product_id" RENAME TO "index_product_references_on_product_category_id"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "idx_on_index_product_references_on_product_category_4bd5a4d83b" ON "product_references" ("index_product_references_on_product_category_id")[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(757198179149183205)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+Migrating to RenameProductItemsAndProducts (20240902165727)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "products" RENAME TO "product_categories"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER INDEX "products_pkey" RENAME TO "product_categories_pkey"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "public"."products_id_seq" RENAME TO "product_categories_id_seq"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "product_items" RENAME TO "products"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER INDEX "product_items_pkey" RENAME TO "products_pkey"[0m
+  [1m[35m (7.9ms)[0m  [1m[35mALTER TABLE "public"."product_items_id_seq" RENAME TO "products_id_seq"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER INDEX "index_product_items_on_archangel_id" RENAME TO "index_products_on_archangel_id"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER INDEX "index_product_items_on_product_reference_id" RENAME TO "index_products_on_product_reference_id"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "product_references" RENAME COLUMN "product_id" TO "product_category_id"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER INDEX "index_product_references_on_product_id" RENAME TO "index_product_references_on_product_category_id"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "idx_on_index_product_references_on_product_category_4bd5a4d83b" ON "product_references" ("index_product_references_on_product_category_id")[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(757198179149183205)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+Migrating to RenameProductItemsAndProducts (20240902165727)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "products" RENAME TO "product_categories"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER INDEX "products_pkey" RENAME TO "product_categories_pkey"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "public"."products_id_seq" RENAME TO "product_categories_id_seq"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "product_items" RENAME TO "products"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER INDEX "product_items_pkey" RENAME TO "products_pkey"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "public"."product_items_id_seq" RENAME TO "products_id_seq"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER INDEX "index_product_items_on_archangel_id" RENAME TO "index_products_on_archangel_id"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER INDEX "index_product_items_on_product_reference_id" RENAME TO "index_products_on_product_reference_id"[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240902165727') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to RenameProductIdInProductReferences (20240902174336)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "product_references" RENAME COLUMN "product_id" TO "product_category_id"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER INDEX "index_product_references_on_product_id" RENAME TO "index_product_references_on_product_category_id"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "idx_on_index_product_references_on_product_category_4bd5a4d83b" ON "product_references" ("index_product_references_on_product_category_id")[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(757198179149183205)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+Migrating to RenameProductIdInProductReferences (20240902174336)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "product_references" RENAME COLUMN "product_id" TO "product_category_id"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER INDEX "index_product_references_on_product_id" RENAME TO "index_product_references_on_product_category_id"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(757198179149183205)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+Migrating to RenameProductIdInProductReferences (20240902174336)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "product_references" RENAME COLUMN "product_id" TO "product_category_id"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER INDEX "index_product_references_on_product_id" RENAME TO "index_product_references_on_product_category_id"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER INDEX "index_product_references_on_product_id" RENAME TO "index_product_references_on_product_category_id"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (69.8ms)[0m  [1m[35mDROP DATABASE IF EXISTS "sandra_suarez_back_end_development"[0m
+  [1m[35m (37.5ms)[0m  [1m[35mDROP DATABASE IF EXISTS "sandra_suarez_back_end_test"[0m
+  [1m[35m (170.0ms)[0m  [1m[35mCREATE DATABASE "sandra_suarez_back_end_development" ENCODING = 'unicode'[0m
+  [1m[35m (68.6ms)[0m  [1m[35mCREATE DATABASE "sandra_suarez_back_end_test" ENCODING = 'unicode'[0m
+  [1m[35m (6.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (3.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (1.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2024-09-02 17:48:22.602136', '2024-09-02 17:48:22.602138') RETURNING "key"[0m
+Migrating to CreateProducts (20240822201655)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.9ms)[0m  [1m[35mCREATE TABLE "products" ("id" bigserial primary key, "name" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240822201655') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProductReferences (20240822201813)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (13.7ms)[0m  [1m[35mCREATE TABLE "product_references" ("id" bigserial primary key, "name" character varying, "description" text, "product_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_af294d612a"
+FOREIGN KEY ("product_id")
+  REFERENCES "products" ("id")
+)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_product_references_on_product_id" ON "product_references" ("product_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240822201813') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateArchangels (20240822201908)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.3ms)[0m  [1m[35mCREATE TABLE "archangels" ("id" bigserial primary key, "name" character varying, "description" text, "color" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240822201908') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProductItems (20240822201912)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (8.1ms)[0m  [1m[35mCREATE TABLE "product_items" ("id" bigserial primary key, "name" character varying, "description" text, "price" decimal, "quantity" integer, "images" text, "product_reference_id" bigint NOT NULL, "archangel_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_b3a5e45afb"
+FOREIGN KEY ("product_reference_id")
+  REFERENCES "product_references" ("id")
+, CONSTRAINT "fk_rails_8227583116"
+FOREIGN KEY ("archangel_id")
+  REFERENCES "archangels" ("id")
+)[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE INDEX "index_product_items_on_product_reference_id" ON "product_items" ("product_reference_id")[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE INDEX "index_product_items_on_archangel_id" ON "product_items" ("archangel_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240822201912') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to RenameProductItemsAndProducts (20240902165727)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "products" RENAME TO "product_categories"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER INDEX "products_pkey" RENAME TO "product_categories_pkey"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "public"."products_id_seq" RENAME TO "product_categories_id_seq"[0m
+  [1m[35m (2.6ms)[0m  [1m[35mALTER TABLE "product_items" RENAME TO "products"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER INDEX "product_items_pkey" RENAME TO "products_pkey"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "public"."product_items_id_seq" RENAME TO "products_id_seq"[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER INDEX "index_product_items_on_archangel_id" RENAME TO "index_products_on_archangel_id"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER INDEX "index_product_items_on_product_reference_id" RENAME TO "index_products_on_product_reference_id"[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240902165727') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to RenameProductIdInProductReferences (20240902174336)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "product_references" RENAME COLUMN "product_id" TO "product_category_id"[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER INDEX "index_product_references_on_product_id" RENAME TO "index_product_references_on_product_category_id"[0m
+  [1m[35m (5.6ms)[0m  [1m[35mALTER INDEX "index_product_references_on_product_id" RENAME TO "index_product_references_on_product_category_id"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(757198179149183205)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+Migrating to RenameProductIdInProductReferences (20240902174336)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "product_references" RENAME COLUMN "product_id" TO "product_category_id"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER INDEX "index_product_references_on_product_id" RENAME TO "index_product_references_on_product_category_id"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER INDEX "index_product_references_on_product_id" RENAME TO "index_product_references_on_product_category_id"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(757198179149183205)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+Migrating to RenameProductIdInProductReferences (20240902174336)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "product_references" RENAME COLUMN "product_id" TO "product_category_id"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER INDEX "index_product_references_on_product_id" RENAME TO "index_product_references_on_product_category_id"[0m
+  [1m[35m (3.9ms)[0m  [1m[35mALTER TABLE "product_references" ADD CONSTRAINT "fk_rails_15449ee736"
+FOREIGN KEY ("product_category_id")
+  REFERENCES "product_categories" ("id")
+[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240902174336') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (67.4ms)[0m  [1m[35mDROP DATABASE IF EXISTS "sandra_suarez_back_end_development"[0m
+  [1m[35m (38.3ms)[0m  [1m[35mDROP DATABASE IF EXISTS "sandra_suarez_back_end_test"[0m
+  [1m[35m (162.1ms)[0m  [1m[35mCREATE DATABASE "sandra_suarez_back_end_development" ENCODING = 'unicode'[0m
+  [1m[35m (104.1ms)[0m  [1m[35mCREATE DATABASE "sandra_suarez_back_end_test" ENCODING = 'unicode'[0m
+  [1m[35m (6.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2024-09-02 17:54:30.512503', '2024-09-02 17:54:30.512504') RETURNING "key"[0m
+Migrating to CreateProducts (20240822201655)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.1ms)[0m  [1m[35mCREATE TABLE "products" ("id" bigserial primary key, "name" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240822201655') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProductReferences (20240822201813)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (14.2ms)[0m  [1m[35mCREATE TABLE "product_references" ("id" bigserial primary key, "name" character varying, "description" text, "product_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_af294d612a"
+FOREIGN KEY ("product_id")
+  REFERENCES "products" ("id")
+)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE INDEX "index_product_references_on_product_id" ON "product_references" ("product_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240822201813') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateArchangels (20240822201908)
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (7.2ms)[0m  [1m[35mCREATE TABLE "archangels" ("id" bigserial primary key, "name" character varying, "description" text, "color" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240822201908') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProductItems (20240822201912)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.7ms)[0m  [1m[35mCREATE TABLE "product_items" ("id" bigserial primary key, "name" character varying, "description" text, "price" decimal, "quantity" integer, "images" text, "product_reference_id" bigint NOT NULL, "archangel_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_b3a5e45afb"
+FOREIGN KEY ("product_reference_id")
+  REFERENCES "product_references" ("id")
+, CONSTRAINT "fk_rails_8227583116"
+FOREIGN KEY ("archangel_id")
+  REFERENCES "archangels" ("id")
+)[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE INDEX "index_product_items_on_product_reference_id" ON "product_items" ("product_reference_id")[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE INDEX "index_product_items_on_archangel_id" ON "product_items" ("archangel_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240822201912') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to RenameProductItemsAndProducts (20240902165727)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "products" RENAME TO "product_categories"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER INDEX "products_pkey" RENAME TO "product_categories_pkey"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "public"."products_id_seq" RENAME TO "product_categories_id_seq"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "product_items" RENAME TO "products"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER INDEX "product_items_pkey" RENAME TO "products_pkey"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "public"."product_items_id_seq" RENAME TO "products_id_seq"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER INDEX "index_product_items_on_archangel_id" RENAME TO "index_products_on_archangel_id"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER INDEX "index_product_items_on_product_reference_id" RENAME TO "index_products_on_product_reference_id"[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240902165727') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to RenameProductIdInProductReferences (20240902174336)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "product_references" RENAME COLUMN "product_id" TO "product_category_id"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER INDEX "index_product_references_on_product_id" RENAME TO "index_product_references_on_product_category_id"[0m
+  [1m[35m (2.7ms)[0m  [1m[35mALTER TABLE "product_references" ADD CONSTRAINT "fk_rails_15449ee736"
+FOREIGN KEY ("product_category_id")
+  REFERENCES "product_categories" ("id")
+[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240902174336') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (98.5ms)[0m  [1m[35mDROP DATABASE IF EXISTS "sandra_suarez_back_end_development"[0m
+  [1m[35m (39.3ms)[0m  [1m[35mDROP DATABASE IF EXISTS "sandra_suarez_back_end_test"[0m
+  [1m[35m (165.1ms)[0m  [1m[35mCREATE DATABASE "sandra_suarez_back_end_development" ENCODING = 'unicode'[0m
+  [1m[35m (90.6ms)[0m  [1m[35mCREATE DATABASE "sandra_suarez_back_end_test" ENCODING = 'unicode'[0m
+  [1m[35m (8.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2024-09-02 17:55:36.625791', '2024-09-02 17:55:36.625793') RETURNING "key"[0m
+Migrating to CreateProducts (20240822201655)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.8ms)[0m  [1m[35mCREATE TABLE "products" ("id" bigserial primary key, "name" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240822201655') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProductReferences (20240822201813)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (15.1ms)[0m  [1m[35mCREATE TABLE "product_references" ("id" bigserial primary key, "name" character varying, "description" text, "product_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_af294d612a"
+FOREIGN KEY ("product_id")
+  REFERENCES "products" ("id")
+)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_product_references_on_product_id" ON "product_references" ("product_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240822201813') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateArchangels (20240822201908)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.8ms)[0m  [1m[35mCREATE TABLE "archangels" ("id" bigserial primary key, "name" character varying, "description" text, "color" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240822201908') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProductItems (20240822201912)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.2ms)[0m  [1m[35mCREATE TABLE "product_items" ("id" bigserial primary key, "name" character varying, "description" text, "price" decimal, "quantity" integer, "images" text, "product_reference_id" bigint NOT NULL, "archangel_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_b3a5e45afb"
+FOREIGN KEY ("product_reference_id")
+  REFERENCES "product_references" ("id")
+, CONSTRAINT "fk_rails_8227583116"
+FOREIGN KEY ("archangel_id")
+  REFERENCES "archangels" ("id")
+)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_product_items_on_product_reference_id" ON "product_items" ("product_reference_id")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_product_items_on_archangel_id" ON "product_items" ("archangel_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240822201912') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to RenameProductItemsAndProducts (20240902165727)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.1ms)[0m  [1m[35mALTER TABLE "products" RENAME TO "product_categories"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER INDEX "products_pkey" RENAME TO "product_categories_pkey"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "public"."products_id_seq" RENAME TO "product_categories_id_seq"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "product_items" RENAME TO "products"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER INDEX "product_items_pkey" RENAME TO "products_pkey"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "public"."product_items_id_seq" RENAME TO "products_id_seq"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER INDEX "index_product_items_on_archangel_id" RENAME TO "index_products_on_archangel_id"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER INDEX "index_product_items_on_product_reference_id" RENAME TO "index_products_on_product_reference_id"[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240902165727') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to RenameProductIdInProductReferences (20240902174336)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "product_references" RENAME COLUMN "product_id" TO "product_category_id"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER INDEX "index_product_references_on_product_id" RENAME TO "index_product_references_on_product_category_id"[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240902174336') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/product_categories" for 127.0.0.1 at 2024-09-02 12:57:53 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (2.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductCategoriesController#create as */*
+  Parameters: {"name"=>"Collar", "product_category"=>{"name"=>"Collar"}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/product_categories_controller.rb:15:in `create'
+  [1m[36mProductCategory Create (1.7ms)[0m  [1m[32mINSERT INTO "product_categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Collar"], ["created_at", "2024-09-02 17:57:53.292079"], ["updated_at", "2024-09-02 17:57:53.292079"]]
+  ↳ app/controllers/product_categories_controller.rb:15:in `create'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/product_categories_controller.rb:15:in `create'
+Completed 201 Created in 15ms (Views: 0.2ms | ActiveRecord: 20.8ms | Allocations: 10858)
+
+
+Started GET "/product_categories" for 127.0.0.1 at 2024-09-02 12:57:57 -0500
+Processing by ProductCategoriesController#index as */*
+  Parameters: {"name"=>"Collar", "product_category"=>{"name"=>"Collar"}}
+  [1m[36mProductCategory Load (0.5ms)[0m  [1m[34mSELECT "product_categories".* FROM "product_categories"[0m
+  ↳ app/controllers/product_categories_controller.rb:6:in `index'
+Completed 200 OK in 6ms (Views: 0.8ms | ActiveRecord: 0.5ms | Allocations: 1884)
+
+
+Started POST "/product_references" for 127.0.0.1 at 2024-09-02 12:58:04 -0500
+Processing by ProductReferencesController#create as */*
+  Parameters: {"name"=>"Collar de plata", "description"=>"Collar de plata de la más alta pureza", "product_category_id"=>1, "product_reference"=>{"name"=>"Collar de plata", "description"=>"Collar de plata de la más alta pureza", "product_category_id"=>1}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/product_references_controller.rb:20:in `create'
+  [1m[36mProductCategory Load (0.2ms)[0m  [1m[34mSELECT "product_categories".* FROM "product_categories" WHERE "product_categories"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/product_references_controller.rb:20:in `create'
+  [1m[36mProductReference Create (2.2ms)[0m  [1m[32mINSERT INTO "product_references" ("name", "description", "product_category_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Collar de plata"], ["description", "Collar de plata de la más alta pureza"], ["product_category_id", 1], ["created_at", "2024-09-02 17:58:04.888345"], ["updated_at", "2024-09-02 17:58:04.888345"]]
+  ↳ app/controllers/product_references_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/product_references_controller.rb:20:in `create'
+Completed 201 Created in 24ms (Views: 0.2ms | ActiveRecord: 6.7ms | Allocations: 8685)
+
+
+Started GET "/product_references" for 127.0.0.1 at 2024-09-02 12:58:08 -0500
+Processing by ProductReferencesController#index as */*
+  Parameters: {"name"=>"Collar", "product_reference"=>{"name"=>"Collar"}}
+  [1m[36mProductReference Load (0.5ms)[0m  [1m[34mSELECT "product_references".* FROM "product_references"[0m
+  ↳ app/controllers/product_references_controller.rb:6:in `index'
+Completed 200 OK in 2ms (Views: 1.0ms | ActiveRecord: 0.5ms | Allocations: 735)
+
+
+Started POST "/archangels" for 127.0.0.1 at 2024-09-02 12:58:25 -0500
+Processing by ArchangelsController#create as */*
+  Parameters: {"name"=>"Miguel", "description"=>"Un arcángel líder y guerrero contra las fuerzas del mal", "color"=>"Azul", "archangel"=>{"name"=>"Miguel", "description"=>"Un arcángel líder y guerrero contra las fuerzas del mal", "color"=>"Azul"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/archangels_controller.rb:15:in `create'
+  [1m[36mArchangel Create (1.6ms)[0m  [1m[32mINSERT INTO "archangels" ("name", "description", "color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Miguel"], ["description", "Un arcángel líder y guerrero contra las fuerzas del mal"], ["color", "Azul"], ["created_at", "2024-09-02 17:58:25.424135"], ["updated_at", "2024-09-02 17:58:25.424135"]]
+  ↳ app/controllers/archangels_controller.rb:15:in `create'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/archangels_controller.rb:15:in `create'
+Completed 201 Created in 7ms (Views: 0.2ms | ActiveRecord: 5.4ms | Allocations: 5056)
+
+
+Started GET "/archangels" for 127.0.0.1 at 2024-09-02 12:58:28 -0500
+Processing by ArchangelsController#index as */*
+  [1m[36mArchangel Load (0.5ms)[0m  [1m[34mSELECT "archangels".* FROM "archangels"[0m
+  ↳ app/controllers/archangels_controller.rb:6:in `index'
+Completed 200 OK in 1ms (Views: 0.7ms | ActiveRecord: 0.5ms | Allocations: 713)
+
+
+Started POST "/products" for 127.0.0.1 at 2024-09-02 12:58:37 -0500
+Processing by ProductsController#create as */*
+  Parameters: {"name"=>"Collar", "product"=>{"name"=>"Collar"}}
+Completed 422 Unprocessable Content in 12ms (Views: 2.2ms | ActiveRecord: 4.6ms | Allocations: 10063)
+
+
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+Migrating to RemoveFieldsFromProducts (20240902181527)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.8ms)[0m  [1m[35mALTER TABLE "products" DROP COLUMN "name"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "products" DROP COLUMN "description"[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240902181527') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/products" for 127.0.0.1 at 2024-09-02 13:22:23 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+SyntaxError (/Users/santiagovelosa/Desktop/sandra-suarez-back-end/app/controllers/products_controller.rb:18: syntax error, unexpected local variable or method, expecting '}'
+        archangel: { only: [:name, :descriptio...
+        ^~~~~~~~~
+):
+  
+app/controllers/products_controller.rb:18: syntax error, unexpected local variable or method, expecting '}'
+Started POST "/products" for 127.0.0.1 at 2024-09-02 13:22:54 -0500
+Processing by ProductsController#create as */*
+  Parameters: {"price"=>25000, "quantity"=>50, "images"=>"https://scarlettjewellery.com/products/sweetheart-silver-necklace?variant=27843444146276#3599133671524-1", "product_reference_id"=>1, "archangel_id"=>1, "product"=>{"price"=>25000, "quantity"=>50, "images"=>"https://scarlettjewellery.com/products/sweetheart-silver-necklace?variant=27843444146276#3599133671524-1", "product_reference_id"=>1, "archangel_id"=>1}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/products_controller.rb:25:in `create'
+  [1m[36mProductReference Load (1.8ms)[0m  [1m[34mSELECT "product_references".* FROM "product_references" WHERE "product_references"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:25:in `create'
+  [1m[36mArchangel Load (0.5ms)[0m  [1m[34mSELECT "archangels".* FROM "archangels" WHERE "archangels"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:25:in `create'
+  [1m[36mProduct Create (4.9ms)[0m  [1m[32mINSERT INTO "products" ("price", "quantity", "images", "product_reference_id", "archangel_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["price", "25000.0"], ["quantity", 50], ["images", "https://scarlettjewellery.com/products/sweetheart-silver-necklace?variant=27843444146276#3599133671524-1"], ["product_reference_id", 1], ["archangel_id", 1], ["created_at", "2024-09-02 18:22:54.299108"], ["updated_at", "2024-09-02 18:22:54.299108"]]
+  ↳ app/controllers/products_controller.rb:25:in `create'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/products_controller.rb:25:in `create'
+Completed 201 Created in 57ms (Views: 0.2ms | ActiveRecord: 37.4ms | Allocations: 31097)
+
+
+Started GET "/products" for 127.0.0.1 at 2024-09-02 13:23:01 -0500
+Processing by ProductsController#index as */*
+  Parameters: {"name"=>"Collar", "product"=>{}}
+  [1m[36mProduct Load (1.2ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:6:in `index'
+  [1m[36mProductReference Load (1.0ms)[0m  [1m[34mSELECT "product_references".* FROM "product_references" WHERE "product_references"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:6:in `index'
+  [1m[36mArchangel Load (0.1ms)[0m  [1m[34mSELECT "archangels".* FROM "archangels" WHERE "archangels"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:6:in `index'
+Completed 200 OK in 4ms (Views: 0.1ms | ActiveRecord: 2.2ms | Allocations: 1946)
+
+

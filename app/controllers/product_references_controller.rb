@@ -7,7 +7,12 @@ class ProductReferencesController < ApplicationController
   end
 
   def show
-    render json: @product_reference
+    render json: @product_reference, include: :products
+  end
+
+  def products
+    @products = @product_reference.products
+    render json: @products
   end
 
   def create
@@ -39,6 +44,6 @@ class ProductReferencesController < ApplicationController
   end
 
   def product_reference_params
-    params.require(:product_reference).permit(:name, :description, :product_id)
+    params.require(:product_reference).permit(:name, :description, :product_category_id)
   end
 end
