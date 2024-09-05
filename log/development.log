@@ -1667,3 +1667,183 @@ Processing by ProductsController#index as */*
 Completed 200 OK in 4ms (Views: 0.1ms | ActiveRecord: 2.2ms | Allocations: 1946)
 
 
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (3.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+Migrating to CreateOrders (20240905150544)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (23.8ms)[0m  [1m[35mCREATE TABLE "orders" ("id" bigserial primary key, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240905150544') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateOrderItems (20240905150607)
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (7.5ms)[0m  [1m[35mCREATE TABLE "order_items" ("id" bigserial primary key, "order_id" bigint NOT NULL, "product_id" bigint NOT NULL, "quantity" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_e3cb28f071"
+FOREIGN KEY ("order_id")
+  REFERENCES "orders" ("id")
+, CONSTRAINT "fk_rails_f1a29ddd47"
+FOREIGN KEY ("product_id")
+  REFERENCES "products" ("id")
+)[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE INDEX "index_order_items_on_order_id" ON "order_items" ("order_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_order_items_on_product_id" ON "order_items" ("product_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240905150607') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/products" for 127.0.0.1 at 2024-09-05 10:16:13 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#index as */*
+  Parameters: {"name"=>"Collar", "product"=>{}}
+  [1m[36mProduct Load (4.2ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:6:in `index'
+  [1m[36mProductReference Load (8.0ms)[0m  [1m[34mSELECT "product_references".* FROM "product_references" WHERE "product_references"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:6:in `index'
+  [1m[36mArchangel Load (3.4ms)[0m  [1m[34mSELECT "archangels".* FROM "archangels" WHERE "archangels"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:6:in `index'
+Completed 200 OK in 58ms (Views: 0.1ms | ActiveRecord: 50.0ms | Allocations: 28905)
+
+
+Started GET "/orders" for 127.0.0.1 at 2024-09-05 10:56:58 -0500
+Processing by OrdersController#index as */*
+  Parameters: {"name"=>"Collar", "order"=>{}}
+  [1m[36mOrder Load (0.3ms)[0m  [1m[34mSELECT "orders".* FROM "orders"[0m
+  ↳ app/controllers/orders_controller.rb:6:in `index'
+Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 11.4ms | Allocations: 767)
+
+
+Started POST "/orders" for 127.0.0.1 at 2024-09-05 11:04:49 -0500
+Processing by OrdersController#create as */*
+  Parameters: {"price"=>25000, "quantity"=>50, "images"=>"https://scarlettjewellery.com/products/sweetheart-silver-necklace?variant=27843444146276#3599133671524-1", "product_reference_id"=>1, "archangel_id"=>1, "order"=>{}}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms | Allocations: 168)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: order):
+  
+app/controllers/orders_controller.rb:32:in `order_params'
+app/controllers/orders_controller.rb:14:in `create'
+Started POST "/orders" for 127.0.0.1 at 2024-09-05 11:05:56 -0500
+Processing by OrdersController#create as */*
+  Parameters: {"order"=>{"order_items_attributes"=>[{"product_id"=>1, "quantity"=>5}]}}
+Completed 500 Internal Server Error in 23ms (ActiveRecord: 14.5ms | Allocations: 4495)
+
+
+  
+ActiveModel::UnknownAttributeError (unknown attribute 'order_items_attributes' for Order.):
+  
+app/controllers/orders_controller.rb:14:in `create'
+Started POST "/orders" for 127.0.0.1 at 2024-09-05 11:07:00 -0500
+Processing by OrdersController#create as */*
+  Parameters: {"order"=>[{"product_id"=>1, "quantity"=>5}]}
+Completed 500 Internal Server Error in 0ms (ActiveRecord: 0.0ms | Allocations: 185)
+
+
+  
+NoMethodError (undefined method `permit' for an instance of Array):
+  
+app/controllers/orders_controller.rb:32:in `order_params'
+app/controllers/orders_controller.rb:14:in `create'
+Started POST "/orders" for 127.0.0.1 at 2024-09-05 11:07:14 -0500
+Processing by OrdersController#create as */*
+  Parameters: {"order"=>[{"product_id"=>1, "quantity"=>5}]}
+Completed 500 Internal Server Error in 0ms (ActiveRecord: 0.0ms | Allocations: 175)
+
+
+  
+NoMethodError (undefined method `permit' for an instance of Array):
+  
+app/controllers/orders_controller.rb:32:in `order_params'
+app/controllers/orders_controller.rb:14:in `create'
+Started POST "/orders" for 127.0.0.1 at 2024-09-05 11:09:36 -0500
+Processing by OrdersController#create as */*
+  Parameters: {"order"=>{"order_items_attributes"=>[{"product_id"=>1, "quantity"=>5}]}}
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 9.9ms | Allocations: 2233)
+
+
+  
+ActiveModel::UnknownAttributeError (unknown attribute 'order_items_attributes' for Order.):
+  
+app/controllers/orders_controller.rb:14:in `create'
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/orders" for 127.0.0.1 at 2024-09-05 11:12:08 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+NoMethodError (undefined method `accept_nested_attributes_for' for class Order):
+  
+app/models/order.rb:5:in `<class:Order>'
+app/models/order.rb:1:in `<main>'
+Started POST "/orders" for 127.0.0.1 at 2024-09-05 11:13:27 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by OrdersController#create as */*
+  Parameters: {"order"=>{"order_items_attributes"=>[{"product_id"=>1, "quantity"=>5}]}}
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/orders_controller.rb:16:in `create'
+  [1m[36mProduct Load (1.0ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/orders_controller.rb:16:in `create'
+  [1m[36mProductReference Load (0.7ms)[0m  [1m[34mSELECT "product_references".* FROM "product_references" WHERE "product_references"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/product.rb:20:in `reduce_stock!'
+  [1m[36mArchangel Load (0.5ms)[0m  [1m[34mSELECT "archangels".* FROM "archangels" WHERE "archangels"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/product.rb:20:in `reduce_stock!'
+  [1m[36mProduct Update (2.0ms)[0m  [1m[33mUPDATE "products" SET "quantity" = $1, "updated_at" = $2 WHERE "products"."id" = $3[0m  [["quantity", 45], ["updated_at", "2024-09-05 16:13:27.931378"], ["id", 1]]
+  ↳ app/models/product.rb:20:in `reduce_stock!'
+  [1m[36mOrder Create (0.7ms)[0m  [1m[32mINSERT INTO "orders" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2024-09-05 16:13:27.934148"], ["updated_at", "2024-09-05 16:13:27.934148"]]
+  ↳ app/controllers/orders_controller.rb:16:in `create'
+  [1m[36mOrderItem Create (2.2ms)[0m  [1m[32mINSERT INTO "order_items" ("order_id", "product_id", "quantity", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["order_id", 1], ["product_id", 1], ["quantity", 5], ["created_at", "2024-09-05 16:13:27.935371"], ["updated_at", "2024-09-05 16:13:27.935371"]]
+  ↳ app/controllers/orders_controller.rb:16:in `create'
+  [1m[36mTRANSACTION (4.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/orders_controller.rb:16:in `create'
+Completed 500 Internal Server Error in 108ms (ActiveRecord: 47.4ms | Allocations: 49918)
+
+
+  
+ArgumentError (Unrecognized status code :created_at):
+  
+app/controllers/orders_controller.rb:17:in `create'
+Started POST "/orders" for 127.0.0.1 at 2024-09-05 11:15:37 -0500
+Processing by OrdersController#create as */*
+  Parameters: {"order"=>{"order_items_attributes"=>[{"product_id"=>1, "quantity"=>5}]}}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/orders_controller.rb:16:in `create'
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/orders_controller.rb:16:in `create'
+  [1m[36mProductReference Load (0.1ms)[0m  [1m[34mSELECT "product_references".* FROM "product_references" WHERE "product_references"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/product.rb:20:in `reduce_stock!'
+  [1m[36mArchangel Load (0.2ms)[0m  [1m[34mSELECT "archangels".* FROM "archangels" WHERE "archangels"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/product.rb:20:in `reduce_stock!'
+  [1m[36mProduct Update (0.2ms)[0m  [1m[33mUPDATE "products" SET "quantity" = $1, "updated_at" = $2 WHERE "products"."id" = $3[0m  [["quantity", 40], ["updated_at", "2024-09-05 16:15:37.798709"], ["id", 1]]
+  ↳ app/models/product.rb:20:in `reduce_stock!'
+  [1m[36mOrder Create (0.2ms)[0m  [1m[32mINSERT INTO "orders" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2024-09-05 16:15:37.799492"], ["updated_at", "2024-09-05 16:15:37.799492"]]
+  ↳ app/controllers/orders_controller.rb:16:in `create'
+  [1m[36mOrderItem Create (0.4ms)[0m  [1m[32mINSERT INTO "order_items" ("order_id", "product_id", "quantity", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["order_id", 2], ["product_id", 1], ["quantity", 5], ["created_at", "2024-09-05 16:15:37.800238"], ["updated_at", "2024-09-05 16:15:37.800238"]]
+  ↳ app/controllers/orders_controller.rb:16:in `create'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/orders_controller.rb:16:in `create'
+Completed 201 Created in 54ms (Views: 0.2ms | ActiveRecord: 32.2ms | Allocations: 25522)
+
+
+Started GET "/orders" for 127.0.0.1 at 2024-09-05 11:15:47 -0500
+Processing by OrdersController#index as */*
+  Parameters: {"name"=>"Collar", "order"=>{}}
+  [1m[36mOrder Load (1.7ms)[0m  [1m[34mSELECT "orders".* FROM "orders"[0m
+  ↳ app/controllers/orders_controller.rb:6:in `index'
+  [1m[36mOrderItem Load (0.5ms)[0m  [1m[34mSELECT "order_items".* FROM "order_items" WHERE "order_items"."order_id" IN ($1, $2)[0m  [["order_id", 1], ["order_id", 2]]
+  ↳ app/controllers/orders_controller.rb:6:in `index'
+Completed 200 OK in 19ms (Views: 16.0ms | ActiveRecord: 2.3ms | Allocations: 4881)
+
+
+Started GET "/products" for 127.0.0.1 at 2024-09-05 11:16:02 -0500
+Processing by ProductsController#index as */*
+  Parameters: {"name"=>"Collar", "product"=>{}}
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:6:in `index'
+  [1m[36mProductReference Load (0.1ms)[0m  [1m[34mSELECT "product_references".* FROM "product_references" WHERE "product_references"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:6:in `index'
+  [1m[36mArchangel Load (0.1ms)[0m  [1m[34mSELECT "archangels".* FROM "archangels" WHERE "archangels"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:6:in `index'
+Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.7ms | Allocations: 1942)
+
+
