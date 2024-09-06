@@ -1,13 +1,13 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show]
+  before_action :set_order, only: [:show, :update]
 
   def index
     @orders = Order.includes(:order_items).all
-    render json: @orders, include: :order_items
+    render json: @orders.as_json(include: :order_items)
   end
 
   def show
-    render json: @order, include: :order_items
+    render json: @order.as_json(include: :order_items)
   end
 
   def create
@@ -20,6 +20,14 @@ class OrdersController < ApplicationController
     end
   end
 
+  def update
+    if @order.update(order_params)
+      render json: @order, status: :ok
+    else
+      render json: @order.errors, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def set_order
@@ -29,6 +37,6 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(order_items_attributes: [:product_id, :quantity])
+    params.require(:order).permit(:first_name, :last_name, :address, :city, :state, :email, :status, order_items_attributes: [:product_id, :quantity])
   end
 end

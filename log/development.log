@@ -1847,3 +1847,386 @@ Processing by ProductsController#index as */*
 Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.7ms | Allocations: 1942)
 
 
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (3.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (3.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+Migrating to AddDetailsToOrders (20240905232112)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (21.5ms)[0m  [1m[35mALTER TABLE "orders" ADD "first_name" character varying[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "orders" ADD "last_name" character varying[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "orders" ADD "address" character varying[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "orders" ADD "state" character varying[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "orders" ADD "city" character varying[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "orders" ADD "status" character varying[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240905232112') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/orders" for 127.0.0.1 at 2024-09-05 18:34:19 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by OrdersController#index as */*
+  Parameters: {"name"=>"Collar", "order"=>{}}
+  [1m[36mOrder Load (4.0ms)[0m  [1m[34mSELECT "orders".* FROM "orders"[0m
+  ↳ app/controllers/orders_controller.rb:6:in `index'
+  [1m[36mOrderItem Load (2.2ms)[0m  [1m[34mSELECT "order_items".* FROM "order_items" WHERE "order_items"."order_id" IN ($1, $2)[0m  [["order_id", 1], ["order_id", 2]]
+  ↳ app/controllers/orders_controller.rb:6:in `index'
+Completed 200 OK in 47ms (Views: 0.1ms | ActiveRecord: 32.8ms | Allocations: 26160)
+
+
+Started PATCH "/orders/1" for 127.0.0.1 at 2024-09-05 18:36:56 -0500
+Processing by OrdersController#update as */*
+  Parameters: {"order"=>{"first_name"=>"Santiago", "last_name"=>"Velosa", "address"=>"Carrera 50 #103B-74", "email"=>"santiagovelosa@gmail.com", "status"=>"Processing Payment"}, "id"=>"1"}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 256)
+
+
+  
+NoMethodError (undefined method `update' for nil):
+  
+app/controllers/orders_controller.rb:24:in `update'
+  [1m[36mOrder Load (1.4ms)[0m  [1m[34mSELECT "orders".* FROM "orders" WHERE "orders"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Started PATCH "/orders/1" for 127.0.0.1 at 2024-09-05 18:42:00 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by OrdersController#update as */*
+  Parameters: {"order"=>{"first_name"=>"Santiago", "last_name"=>"Velosa", "address"=>"Carrera 50 #103B-74", "email"=>"santiagovelosa@gmail.com", "status"=>"Processing Payment"}, "id"=>"1"}
+  [1m[36mOrder Load (1.1ms)[0m  [1m[34mSELECT "orders".* FROM "orders" WHERE "orders"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/orders_controller.rb:34:in `set_order'
+Completed 500 Internal Server Error in 52ms (ActiveRecord: 20.1ms | Allocations: 20287)
+
+
+  
+ActiveModel::UnknownAttributeError (unknown attribute 'email' for Order.):
+  
+app/controllers/orders_controller.rb:24:in `update'
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started PATCH "/orders/1" for 127.0.0.1 at 2024-09-05 18:43:39 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by OrdersController#update as */*
+  Parameters: {"order"=>{"first_name"=>"Santiago", "last_name"=>"Velosa", "address"=>"Carrera 50 #103B-74", "email"=>"santiagovelosa@gmail.com", "status"=>"Processing Payment"}, "id"=>"1"}
+  [1m[36mOrder Load (0.5ms)[0m  [1m[34mSELECT "orders".* FROM "orders" WHERE "orders"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/orders_controller.rb:34:in `set_order'
+Completed 500 Internal Server Error in 41ms (ActiveRecord: 15.7ms | Allocations: 20287)
+
+
+  
+ActiveModel::UnknownAttributeError (unknown attribute 'email' for Order.):
+  
+app/controllers/orders_controller.rb:24:in `update'
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+Migrating to AddDetailsToOrders (20240905232111)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.7ms)[0m  [1m[35mALTER TABLE "orders" ADD "first_name" character varying[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddDetailsToOrders (20240905232112)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.7ms)[0m  [1m[35mALTER TABLE "orders" DROP COLUMN "status"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "orders" DROP COLUMN "city"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "orders" DROP COLUMN "state"[0m
+  [1m[35m (3.0ms)[0m  [1m[35mALTER TABLE "orders" DROP COLUMN "address"[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "orders" DROP COLUMN "email"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(757198179149183205)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.5ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT pg_try_advisory_lock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+Migrating to AddEmailToOrders (20240905234940)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "orders" ADD "email" character varying[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240905234940') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(757198179149183205)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started PATCH "/orders/1" for 127.0.0.1 at 2024-09-05 18:50:12 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by OrdersController#update as */*
+  Parameters: {"order"=>{"first_name"=>"Santiago", "last_name"=>"Velosa", "address"=>"Carrera 50 #103B-74", "email"=>"santiagovelosa@gmail.com", "status"=>"Processing Payment"}, "id"=>"1"}
+  [1m[36mOrder Load (0.5ms)[0m  [1m[34mSELECT "orders".* FROM "orders" WHERE "orders"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/orders_controller.rb:34:in `set_order'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/orders_controller.rb:24:in `update'
+  [1m[36mOrderItem Load (0.5ms)[0m  [1m[34mSELECT "order_items".* FROM "order_items" WHERE "order_items"."order_id" = $1[0m  [["order_id", 1]]
+  ↳ app/controllers/orders_controller.rb:24:in `update'
+  [1m[36mProduct Load (6.8ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/order.rb:17:in `block in update_quantity'
+  [1m[36mProductReference Load (1.7ms)[0m  [1m[34mSELECT "product_references".* FROM "product_references" WHERE "product_references"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/product.rb:20:in `reduce_stock!'
+  [1m[36mArchangel Load (1.0ms)[0m  [1m[34mSELECT "archangels".* FROM "archangels" WHERE "archangels"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/product.rb:20:in `reduce_stock!'
+  [1m[36mProduct Update (3.1ms)[0m  [1m[33mUPDATE "products" SET "quantity" = $1, "updated_at" = $2 WHERE "products"."id" = $3[0m  [["quantity", 35], ["updated_at", "2024-09-05 23:50:12.809847"], ["id", 1]]
+  ↳ app/models/product.rb:20:in `reduce_stock!'
+  [1m[36mOrder Update (0.3ms)[0m  [1m[33mUPDATE "orders" SET "updated_at" = $1, "first_name" = $2, "last_name" = $3, "address" = $4, "status" = $5, "email" = $6 WHERE "orders"."id" = $7[0m  [["updated_at", "2024-09-05 23:50:12.813950"], ["first_name", "Santiago"], ["last_name", "Velosa"], ["address", "Carrera 50 #103B-74"], ["status", "Processing Payment"], ["email", "santiagovelosa@gmail.com"], ["id", 1]]
+  ↳ app/controllers/orders_controller.rb:24:in `update'
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/orders_controller.rb:24:in `update'
+Completed 200 OK in 116ms (Views: 0.2ms | ActiveRecord: 55.5ms | Allocations: 56086)
+
+
+Started GET "/orders" for 127.0.0.1 at 2024-09-05 18:50:31 -0500
+Processing by OrdersController#index as */*
+  Parameters: {"name"=>"Collar", "order"=>{}}
+  [1m[36mOrder Load (0.7ms)[0m  [1m[34mSELECT "orders".* FROM "orders"[0m
+  ↳ app/controllers/orders_controller.rb:6:in `index'
+  [1m[36mOrderItem Load (0.5ms)[0m  [1m[34mSELECT "order_items".* FROM "order_items" WHERE "order_items"."order_id" IN ($1, $2)[0m  [["order_id", 2], ["order_id", 1]]
+  ↳ app/controllers/orders_controller.rb:6:in `index'
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 1.2ms | Allocations: 2850)
+
+
+Started PATCH "/orders/1" for 127.0.0.1 at 2024-09-05 18:52:27 -0500
+Processing by OrdersController#update as */*
+  Parameters: {"order"=>{"city"=>"Bogotá", "state"=>"Bogotá"}, "id"=>"1"}
+  [1m[36mOrder Load (0.3ms)[0m  [1m[34mSELECT "orders".* FROM "orders" WHERE "orders"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/orders_controller.rb:34:in `set_order'
+[31mUnpermitted parameters: :city, :state. Context: { controller: OrdersController, action: update, request: #<ActionDispatch::Request:0x0000000122dffca0>, params: {"order"=>{"city"=>"Bogotá", "state"=>"Bogotá"}, "controller"=>"orders", "action"=>"update", "id"=>"1"} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/orders_controller.rb:24:in `update'
+  [1m[36mOrderItem Load (0.2ms)[0m  [1m[34mSELECT "order_items".* FROM "order_items" WHERE "order_items"."order_id" = $1[0m  [["order_id", 1]]
+  ↳ app/controllers/orders_controller.rb:24:in `update'
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/order.rb:17:in `block in update_quantity'
+  [1m[36mProductReference Load (0.4ms)[0m  [1m[34mSELECT "product_references".* FROM "product_references" WHERE "product_references"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/product.rb:20:in `reduce_stock!'
+  [1m[36mArchangel Load (0.5ms)[0m  [1m[34mSELECT "archangels".* FROM "archangels" WHERE "archangels"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/product.rb:20:in `reduce_stock!'
+  [1m[36mProduct Update (0.4ms)[0m  [1m[33mUPDATE "products" SET "quantity" = $1, "updated_at" = $2 WHERE "products"."id" = $3[0m  [["quantity", 30], ["updated_at", "2024-09-05 23:52:27.589972"], ["id", 1]]
+  ↳ app/models/product.rb:20:in `reduce_stock!'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/orders_controller.rb:24:in `update'
+Completed 200 OK in 13ms (Views: 0.1ms | ActiveRecord: 2.7ms | Allocations: 5180)
+
+
+Started GET "/orders" for 127.0.0.1 at 2024-09-05 18:52:37 -0500
+Processing by OrdersController#index as */*
+  Parameters: {"name"=>"Collar", "order"=>{}}
+  [1m[36mOrder Load (0.4ms)[0m  [1m[34mSELECT "orders".* FROM "orders"[0m
+  ↳ app/controllers/orders_controller.rb:6:in `index'
+  [1m[36mOrderItem Load (0.2ms)[0m  [1m[34mSELECT "order_items".* FROM "order_items" WHERE "order_items"."order_id" IN ($1, $2)[0m  [["order_id", 2], ["order_id", 1]]
+  ↳ app/controllers/orders_controller.rb:6:in `index'
+Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.6ms | Allocations: 1491)
+
+
+Started GET "/orders" for 127.0.0.1 at 2024-09-05 18:52:46 -0500
+Processing by OrdersController#index as */*
+  Parameters: {"name"=>"Collar", "order"=>{}}
+  [1m[36mOrder Load (0.4ms)[0m  [1m[34mSELECT "orders".* FROM "orders"[0m
+  ↳ app/controllers/orders_controller.rb:6:in `index'
+  [1m[36mOrderItem Load (0.3ms)[0m  [1m[34mSELECT "order_items".* FROM "order_items" WHERE "order_items"."order_id" IN ($1, $2)[0m  [["order_id", 2], ["order_id", 1]]
+  ↳ app/controllers/orders_controller.rb:6:in `index'
+Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.7ms | Allocations: 1482)
+
+
+Started GET "/orders" for 127.0.0.1 at 2024-09-05 18:53:04 -0500
+Processing by OrdersController#index as */*
+  Parameters: {"name"=>"Collar", "order"=>{}}
+  [1m[36mOrder Load (0.6ms)[0m  [1m[34mSELECT "orders".* FROM "orders"[0m
+  ↳ app/controllers/orders_controller.rb:6:in `index'
+  [1m[36mOrderItem Load (0.2ms)[0m  [1m[34mSELECT "order_items".* FROM "order_items" WHERE "order_items"."order_id" IN ($1, $2)[0m  [["order_id", 2], ["order_id", 1]]
+  ↳ app/controllers/orders_controller.rb:6:in `index'
+Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.9ms | Allocations: 1469)
+
+
+Started PATCH "/orders/1" for 127.0.0.1 at 2024-09-05 18:53:39 -0500
+Processing by OrdersController#update as */*
+  Parameters: {"order"=>{"city"=>"Bogotá", "state"=>"Bogotá"}, "id"=>"1"}
+Completed 404 Not Found in 0ms (ActiveRecord: 0.0ms | Allocations: 148)
+
+
+  
+AbstractController::ActionNotFound (The updateex action could not be found for the :set_order
+callback on OrdersController, but it is listed in the controller's
+:only option.
+
+Raising for missing callback actions is a new default in Rails 7.1, if you'd
+like to turn this off you can delete the option from the environment configurations
+or set `config.action_controller.raise_on_missing_callback_actions` to `false`.
+):
+  
+actionpack (7.1.3.4) lib/abstract_controller/callbacks.rb:62:in `match?'
+activesupport (7.1.3.4) lib/active_support/callbacks.rb:426:in `block in make_lambda'
+activesupport (7.1.3.4) lib/active_support/callbacks.rb:182:in `block (2 levels) in halting_and_conditional'
+activesupport (7.1.3.4) lib/active_support/callbacks.rb:182:in `all?'
+activesupport (7.1.3.4) lib/active_support/callbacks.rb:182:in `block in halting_and_conditional'
+activesupport (7.1.3.4) lib/active_support/callbacks.rb:598:in `block in invoke_before'
+activesupport (7.1.3.4) lib/active_support/callbacks.rb:598:in `each'
+activesupport (7.1.3.4) lib/active_support/callbacks.rb:598:in `invoke_before'
+activesupport (7.1.3.4) lib/active_support/callbacks.rb:109:in `run_callbacks'
+actionpack (7.1.3.4) lib/abstract_controller/callbacks.rb:258:in `process_action'
+actionpack (7.1.3.4) lib/action_controller/metal/rescue.rb:25:in `process_action'
+actionpack (7.1.3.4) lib/action_controller/metal/instrumentation.rb:74:in `block in process_action'
+activesupport (7.1.3.4) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.1.3.4) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (7.1.3.4) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.1.3.4) lib/action_controller/metal/instrumentation.rb:73:in `process_action'
+actionpack (7.1.3.4) lib/action_controller/metal/params_wrapper.rb:261:in `process_action'
+activerecord (7.1.3.4) lib/active_record/railties/controller_runtime.rb:32:in `process_action'
+actionpack (7.1.3.4) lib/abstract_controller/base.rb:160:in `process'
+actionpack (7.1.3.4) lib/action_controller/metal.rb:227:in `dispatch'
+actionpack (7.1.3.4) lib/action_controller/metal.rb:309:in `dispatch'
+actionpack (7.1.3.4) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.1.3.4) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.1.3.4) lib/action_dispatch/journey/router.rb:51:in `block in serve'
+actionpack (7.1.3.4) lib/action_dispatch/journey/router.rb:131:in `block in find_routes'
+actionpack (7.1.3.4) lib/action_dispatch/journey/router.rb:124:in `each'
+actionpack (7.1.3.4) lib/action_dispatch/journey/router.rb:124:in `find_routes'
+actionpack (7.1.3.4) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.1.3.4) lib/action_dispatch/routing/route_set.rb:882:in `call'
+rack (3.1.7) lib/rack/etag.rb:29:in `call'
+rack (3.1.7) lib/rack/conditional_get.rb:43:in `call'
+rack (3.1.7) lib/rack/head.rb:15:in `call'
+activerecord (7.1.3.4) lib/active_record/migration.rb:655:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+activesupport (7.1.3.4) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/callbacks.rb:28:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/actionable_exceptions.rb:16:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (7.1.3.4) lib/rails/rack/logger.rb:37:in `call_app'
+railties (7.1.3.4) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (7.1.3.4) lib/active_support/tagged_logging.rb:135:in `block in tagged'
+activesupport (7.1.3.4) lib/active_support/tagged_logging.rb:39:in `tagged'
+activesupport (7.1.3.4) lib/active_support/tagged_logging.rb:135:in `tagged'
+activesupport (7.1.3.4) lib/active_support/broadcast_logger.rb:240:in `method_missing'
+railties (7.1.3.4) lib/rails/rack/logger.rb:24:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/remote_ip.rb:92:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/request_id.rb:28:in `call'
+rack (3.1.7) lib/rack/runtime.rb:24:in `call'
+activesupport (7.1.3.4) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/server_timing.rb:59:in `block in call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/server_timing.rb:24:in `collect_events'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/server_timing.rb:58:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/static.rb:25:in `call'
+rack (3.1.7) lib/rack/sendfile.rb:114:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/host_authorization.rb:141:in `call'
+railties (7.1.3.4) lib/rails/engine.rb:536:in `call'
+puma (6.4.2) lib/puma/configuration.rb:272:in `call'
+puma (6.4.2) lib/puma/request.rb:100:in `block in handle_request'
+puma (6.4.2) lib/puma/thread_pool.rb:378:in `with_force_shutdown'
+puma (6.4.2) lib/puma/request.rb:99:in `handle_request'
+puma (6.4.2) lib/puma/server.rb:464:in `process_client'
+puma (6.4.2) lib/puma/server.rb:245:in `block in run'
+puma (6.4.2) lib/puma/thread_pool.rb:155:in `block in spawn_thread'
+Started PATCH "/orders/1" for 127.0.0.1 at 2024-09-05 18:55:02 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (3.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by OrdersController#update as */*
+  Parameters: {"order"=>{"city"=>"Bogotá", "state"=>"Bogotá"}, "id"=>"1"}
+  [1m[36mOrder Load (1.1ms)[0m  [1m[34mSELECT "orders".* FROM "orders" WHERE "orders"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/orders_controller.rb:34:in `set_order'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/orders_controller.rb:24:in `update'
+  [1m[36mOrderItem Load (0.6ms)[0m  [1m[34mSELECT "order_items".* FROM "order_items" WHERE "order_items"."order_id" = $1[0m  [["order_id", 1]]
+  ↳ app/controllers/orders_controller.rb:24:in `update'
+  [1m[36mProduct Load (1.4ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/order.rb:17:in `block in update_quantity'
+  [1m[36mProductReference Load (0.6ms)[0m  [1m[34mSELECT "product_references".* FROM "product_references" WHERE "product_references"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/product.rb:20:in `reduce_stock!'
+  [1m[36mArchangel Load (0.5ms)[0m  [1m[34mSELECT "archangels".* FROM "archangels" WHERE "archangels"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/product.rb:20:in `reduce_stock!'
+  [1m[36mProduct Update (0.5ms)[0m  [1m[33mUPDATE "products" SET "quantity" = $1, "updated_at" = $2 WHERE "products"."id" = $3[0m  [["quantity", 25], ["updated_at", "2024-09-05 23:55:02.661462"], ["id", 1]]
+  ↳ app/models/product.rb:20:in `reduce_stock!'
+  [1m[36mOrder Update (1.7ms)[0m  [1m[33mUPDATE "orders" SET "updated_at" = $1, "state" = $2, "city" = $3 WHERE "orders"."id" = $4[0m  [["updated_at", "2024-09-05 23:55:02.662563"], ["state", "Bogotá"], ["city", "Bogotá"], ["id", 1]]
+  ↳ app/controllers/orders_controller.rb:24:in `update'
+  [1m[36mTRANSACTION (3.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/orders_controller.rb:24:in `update'
+Completed 200 OK in 114ms (Views: 0.2ms | ActiveRecord: 43.7ms | Allocations: 56076)
+
+
+Started GET "/orders" for 127.0.0.1 at 2024-09-05 18:55:08 -0500
+Processing by OrdersController#index as */*
+  Parameters: {"name"=>"Collar", "order"=>{}}
+  [1m[36mOrder Load (0.5ms)[0m  [1m[34mSELECT "orders".* FROM "orders"[0m
+  ↳ app/controllers/orders_controller.rb:6:in `index'
+  [1m[36mOrderItem Load (0.5ms)[0m  [1m[34mSELECT "order_items".* FROM "order_items" WHERE "order_items"."order_id" IN ($1, $2)[0m  [["order_id", 2], ["order_id", 1]]
+  ↳ app/controllers/orders_controller.rb:6:in `index'
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 1.0ms | Allocations: 2856)
+
+
+Started PATCH "/orders/2" for 127.0.0.1 at 2024-09-05 19:03:42 -0500
+Processing by OrdersController#update as */*
+  Parameters: {"order"=>{"first_name"=>"Julián", "last_name"=>"Arango", "address"=>"La calle aquella en Cali", "city"=>"Cali", "state"=>"Valle del Cauca", "email"=>"ja818@email.com"}, "id"=>"2"}
+  [1m[36mOrder Load (1.0ms)[0m  [1m[34mSELECT "orders".* FROM "orders" WHERE "orders"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/orders_controller.rb:34:in `set_order'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/orders_controller.rb:24:in `update'
+  [1m[36mOrderItem Load (0.5ms)[0m  [1m[34mSELECT "order_items".* FROM "order_items" WHERE "order_items"."order_id" = $1[0m  [["order_id", 2]]
+  ↳ app/controllers/orders_controller.rb:24:in `update'
+  [1m[36mProduct Load (1.4ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/order.rb:17:in `block in update_quantity'
+  [1m[36mProductReference Load (0.4ms)[0m  [1m[34mSELECT "product_references".* FROM "product_references" WHERE "product_references"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/product.rb:20:in `reduce_stock!'
+  [1m[36mArchangel Load (0.3ms)[0m  [1m[34mSELECT "archangels".* FROM "archangels" WHERE "archangels"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/product.rb:20:in `reduce_stock!'
+  [1m[36mProduct Update (0.9ms)[0m  [1m[33mUPDATE "products" SET "quantity" = $1, "updated_at" = $2 WHERE "products"."id" = $3[0m  [["quantity", 20], ["updated_at", "2024-09-06 00:03:43.015962"], ["id", 1]]
+  ↳ app/models/product.rb:20:in `reduce_stock!'
+  [1m[36mOrder Update (0.2ms)[0m  [1m[33mUPDATE "orders" SET "updated_at" = $1, "first_name" = $2, "last_name" = $3, "address" = $4, "state" = $5, "city" = $6, "email" = $7 WHERE "orders"."id" = $8[0m  [["updated_at", "2024-09-06 00:03:43.017404"], ["first_name", "Julián"], ["last_name", "Arango"], ["address", "La calle aquella en Cali"], ["state", "Valle del Cauca"], ["city", "Cali"], ["email", "ja818@email.com"], ["id", 2]]
+  ↳ app/controllers/orders_controller.rb:24:in `update'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/orders_controller.rb:24:in `update'
+Completed 200 OK in 28ms (Views: 0.1ms | ActiveRecord: 12.8ms | Allocations: 8503)
+
+
+Started GET "/orders" for 127.0.0.1 at 2024-09-05 19:03:46 -0500
+Processing by OrdersController#index as */*
+  Parameters: {"name"=>"Collar", "order"=>{}}
+  [1m[36mOrder Load (0.6ms)[0m  [1m[34mSELECT "orders".* FROM "orders"[0m
+  ↳ app/controllers/orders_controller.rb:6:in `index'
+  [1m[36mOrderItem Load (0.6ms)[0m  [1m[34mSELECT "order_items".* FROM "order_items" WHERE "order_items"."order_id" IN ($1, $2)[0m  [["order_id", 1], ["order_id", 2]]
+  ↳ app/controllers/orders_controller.rb:6:in `index'
+Completed 200 OK in 8ms (Views: 0.1ms | ActiveRecord: 1.2ms | Allocations: 1509)
+
+
+Started PATCH "/orders/2" for 127.0.0.1 at 2024-09-05 19:04:15 -0500
+Processing by OrdersController#update as */*
+  Parameters: {"order"=>{"status"=>"New"}, "id"=>"2"}
+  [1m[36mOrder Load (0.3ms)[0m  [1m[34mSELECT "orders".* FROM "orders" WHERE "orders"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/orders_controller.rb:34:in `set_order'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/orders_controller.rb:24:in `update'
+  [1m[36mOrderItem Load (3.6ms)[0m  [1m[34mSELECT "order_items".* FROM "order_items" WHERE "order_items"."order_id" = $1[0m  [["order_id", 2]]
+  ↳ app/controllers/orders_controller.rb:24:in `update'
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/order.rb:17:in `block in update_quantity'
+  [1m[36mProductReference Load (0.1ms)[0m  [1m[34mSELECT "product_references".* FROM "product_references" WHERE "product_references"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/product.rb:20:in `reduce_stock!'
+  [1m[36mArchangel Load (0.1ms)[0m  [1m[34mSELECT "archangels".* FROM "archangels" WHERE "archangels"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/product.rb:20:in `reduce_stock!'
+  [1m[36mProduct Update (0.3ms)[0m  [1m[33mUPDATE "products" SET "quantity" = $1, "updated_at" = $2 WHERE "products"."id" = $3[0m  [["quantity", 15], ["updated_at", "2024-09-06 00:04:15.364046"], ["id", 1]]
+  ↳ app/models/product.rb:20:in `reduce_stock!'
+  [1m[36mOrder Update (0.1ms)[0m  [1m[33mUPDATE "orders" SET "updated_at" = $1, "status" = $2 WHERE "orders"."id" = $3[0m  [["updated_at", "2024-09-06 00:04:15.364803"], ["status", "New"], ["id", 2]]
+  ↳ app/controllers/orders_controller.rb:24:in `update'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/orders_controller.rb:24:in `update'
+Completed 200 OK in 15ms (Views: 0.2ms | ActiveRecord: 4.9ms | Allocations: 5628)
+
+
+Started GET "/orders" for 127.0.0.1 at 2024-09-05 19:04:18 -0500
+Processing by OrdersController#index as */*
+  Parameters: {"name"=>"Collar", "order"=>{}}
+  [1m[36mOrder Load (0.4ms)[0m  [1m[34mSELECT "orders".* FROM "orders"[0m
+  ↳ app/controllers/orders_controller.rb:6:in `index'
+  [1m[36mOrderItem Load (0.2ms)[0m  [1m[34mSELECT "order_items".* FROM "order_items" WHERE "order_items"."order_id" IN ($1, $2)[0m  [["order_id", 1], ["order_id", 2]]
+  ↳ app/controllers/orders_controller.rb:6:in `index'
+Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.6ms | Allocations: 1488)
+
+

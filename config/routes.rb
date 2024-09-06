@@ -12,5 +12,5 @@ Rails.application.routes.draw do
   resources :product_references
   resources :products
   resources :archangels
-  resources :orders, only: [:index, :show, :create]
+  resources :orders, only: [:index, :show, :create, :update]
 end

@@ -5,6 +5,8 @@ class Order < ApplicationRecord
   accepts_nested_attributes_for :order_items
 
   validates :order_items, presence: true
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_blank: true
+  validates :status, inclusion: { in: %w[New Processing\ Payment Paid Shipped Completed] }, allow_blank:true
 
   before_save :update_quantity
 
