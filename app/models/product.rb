@@ -16,7 +16,18 @@ class Product < ApplicationRecord
   end
 
   def reduce_stock!(order_quantity)
-    raise "Inventario insuficiente" if quantity < order_quantity
-    update!(quantity: quantity - order_quantity)
-  end
+    ApplicationRecord.transaction do
+      Rails.logger.info("Attempting to reduce stock for product #{id}: current quantity #{quantity}, reduce by #{order_quantity}")
+      if quantity >= order_quantity
+        new_quantity = quantity - order_quantity
+        Rails.logger.info("Reducing stock for product #{id}: new quantity #{new_quantity}")
+        update!(quantity: new_quantity)
+      else
+        raise "Insufficient inventory for product #{id}"
+      end
+    end
+  rescue StandardError => e
+    Rails.logger.error "Error reducing stock for product #{id}: #{e.message}"
+    raise
+  end  
 end
